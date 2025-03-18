@@ -4,7 +4,9 @@ const router = express.Router();
 const amqp = require("amqplib");
 const axios = require("axios"); 
 
-const RABBITMQ_URL = process.env.RABBITMQ_URL || "amqp://localhost";
+const RABBITMQ_URL = process.env.RABBITMQ_URL;
+const USER_SERVICE_URL = process.env.USER_SERVICE_URL || "http://localhost:5004";
+const EVENT_SERVICE_URL = process.env.EVENT_SERVICE_URL || "http://localhost:5002";
 
 // Function to send a message to RabbitMQ
 const sendNotification = async (userEmail, message) => {
@@ -45,13 +47,13 @@ router.post("/", async (req, res) => {
             return res.status(400).json({ error: "Missing required fields" });
         }
 
-        const userResponse = await axios.get(`http://localhost:5004/users/${userId}`);
+        const userResponse = await axios.get(`${USER_SERVICE_URL}/users/${userId}`);
         if (!userResponse.data) {
             console.log("[Validation Error] Invalid user ID:", userId);
             return res.status(400).json({ error: "Invalid user ID" });
         }
         
-        const eventResponse = await axios.get(`http://localhost:5002/events/${eventId}`);
+        const eventResponse = await axios.get(`${EVENT_SERVICE_URL}/events/${eventId}`);
         if (!eventResponse.data) {
             console.log("[Validation Error] Invalid event ID:", eventId);
             return res.status(400).json({ error: "Invalid event ID" });
@@ -62,6 +64,7 @@ router.post("/", async (req, res) => {
             eventId,
             numTickets,
             bookingDate: new Date(),
+            status: "CONFIRMED"
         });
 
         const event = eventResponse.data;
