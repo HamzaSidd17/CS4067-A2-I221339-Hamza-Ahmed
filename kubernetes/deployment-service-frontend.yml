@@ -1,0 +1,41 @@
+apiVersion: apps/v1  
+kind: Deployment
+metadata:
+  name: frontend-service-deployment
+  namespace: online-event-booking-hamza-ahmed
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend-service
+  template:  
+    metadata:
+      labels:
+        app: frontend-service
+    spec:
+      volumes:
+        - name: secrets
+          secret:
+            secretName: frontend-secrets  
+
+      containers:
+        - name: frontend-service
+          image: 22i1339/cs4067-a2-i221339-hamza-ahmed-frontendservice:latest  
+          ports:
+            - containerPort: 3000
+
+---
+
+apiVersion: v1  
+kind: Service
+metadata:
+  name: frontend-service-service
+  namespace: online-event-booking-hamza-ahmed
+spec:
+  selector:
+    app: frontend-service
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: LoadBalancer  
