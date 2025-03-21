@@ -20,7 +20,7 @@ spec:
 
       containers:
         - name: frontend-service
-          image: 22i1339/cs4067-a2-i221339-hamza-ahmed-frontendservice:latest  
+          image: 22i1339/cs4067-a2-i221339-hamza-ahmed-uiservice:latest  
           ports:
             - containerPort: 3000
 
