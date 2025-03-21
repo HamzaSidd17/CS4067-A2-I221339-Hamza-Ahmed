@@ -20,7 +20,8 @@ spec:
 
       containers:
         - name: notification-service
-          image: 22i1339/cs4067-a2-i221339-hamza-ahmed-notificationservice:latest  
+          image: localhost:5000/cs4067-a2-i221339-hamza-ahmed-notificationservice:latest 
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5003
           envFrom:
@@ -36,7 +37,7 @@ spec:
 apiVersion: v1  
 kind: Service
 metadata:
-  name: notification-service-service
+  name: notification-service
   namespace: online-event-booking-hamza-ahmed
 spec:
   selector:

@@ -15,7 +15,8 @@ spec:
     spec:
       containers:
         - name: event-service
-          image: 22i1339/cs4067-a2-i221339-hamza-ahmed-eventservice:latest  
+          image: localhost:5000/cs4067-a2-i221339-hamza-ahmed-eventservice:latest 
+          imagePullPolicy: IfNotPresent          
           ports:
             - containerPort: 5002
           envFrom:
@@ -27,7 +28,7 @@ spec:
 apiVersion: v1  
 kind: Service
 metadata:
-  name: event-service-service
+  name: event-service
   namespace: online-event-booking-hamza-ahmed
 spec:
   selector:

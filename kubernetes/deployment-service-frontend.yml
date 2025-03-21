@@ -20,7 +20,8 @@ spec:
 
       containers:
         - name: frontend-service
-          image: 22i1339/cs4067-a2-i221339-hamza-ahmed-uiservice:latest  
+          image: localhost:5000/cs4067-a2-i221339-hamza-ahmed-uiservice:latest 
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
 
@@ -29,7 +30,7 @@ spec:
 apiVersion: v1  
 kind: Service
 metadata:
-  name: frontend-service-service
+  name: frontend-service
   namespace: online-event-booking-hamza-ahmed
 spec:
   selector:
