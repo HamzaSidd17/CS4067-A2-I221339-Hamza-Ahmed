@@ -16,6 +16,7 @@ spec:
       containers:
         - name: rabbitmq
           image: rabbitmq:3-management-alpine
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5672  # RabbitMQ message broker port
             - containerPort: 15672 # Management UI port
@@ -42,10 +43,39 @@ spec:
   selector:
     app: rabbitmq
   ports:
-    - protocol: TCP
+    - name: amqp  # ✅ Added name for AMQP (Messaging) port
+      protocol: TCP
       port: 5672
-      targetPort: 5672  # AMQP (Messaging) Port
-    - protocol: TCP
+      targetPort: 5672
+    - name: management  # ✅ Added name for RabbitMQ UI port
+      protocol: TCP
       port: 15672
-      targetPort: 15672  # RabbitMQ Management UI Port
+      targetPort: 15672
   type: ClusterIP  # Internal service for microservices to connect
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rabbitmq-pvc
+  namespace: online-event-booking-hamza-ahmed
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rabbitmq-log-pvc
+  namespace: online-event-booking-hamza-ahmed
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi
+

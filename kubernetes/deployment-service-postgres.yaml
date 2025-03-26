@@ -15,7 +15,8 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: postgres:latest
+          image: localhost:5000/postgres:latest
+          imagePullPolicy: IfNotPresent
           env:
             - name: POSTGRES_USER
               value: "root"
@@ -37,7 +38,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgres-service
+  name: postgresdb
   namespace: online-event-booking-hamza-ahmed
 spec:
   selector:
@@ -47,3 +48,16 @@ spec:
       port: 5432
       targetPort: 5432
   type: ClusterIP  # Internal service within Kubernetes
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+  namespace: online-event-booking-hamza-ahmed
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

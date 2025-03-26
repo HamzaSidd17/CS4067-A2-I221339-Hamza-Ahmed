@@ -15,7 +15,8 @@ spec:
     spec:
       containers:
         - name: mongodb
-          image: mongo:latest
+          image: localhost:5000/mongo:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 27017
           volumeMounts:
@@ -30,7 +31,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongodb-service
+  name: mongodb
   namespace: online-event-booking-hamza-ahmed
 spec:
   selector:
@@ -40,3 +41,16 @@ spec:
       port: 27017
       targetPort: 27017
   type: ClusterIP  # Internal service within Kubernetes
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-pvc
+  namespace: online-event-booking-hamza-ahmed
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi

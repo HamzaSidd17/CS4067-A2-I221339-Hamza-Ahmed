@@ -4,7 +4,7 @@ metadata:
   name: event-service-deployment
   namespace: online-event-booking-hamza-ahmed
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: event-service

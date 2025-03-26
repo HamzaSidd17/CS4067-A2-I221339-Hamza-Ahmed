@@ -4,7 +4,7 @@ metadata:
   name: booking-service-deployment
   namespace: online-event-booking-hamza-ahmed
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: booking-service
@@ -13,10 +13,10 @@ spec:
       labels:
         app: booking-service
     spec:
-      volumes:
-        - name: secrets
-          secret:
-            secretName: booking-secrets  
+      # volumes:
+      #   - name: secrets
+      #     secret:
+      #       secretName: booking-secrets  
 
       containers:
         - name: booking-service
@@ -27,10 +27,10 @@ spec:
           envFrom:
             - configMapRef:
                 name: booking-config  
-          volumeMounts:
-            - name: secrets  
-              readOnly: true
-              mountPath: "/etc/secret-volume"
+          # volumeMounts:
+          #   - name: secrets  
+          #     readOnly: true
+          #     mountPath: "/etc/secret-volume"
 
 ---
 
