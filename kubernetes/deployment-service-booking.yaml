@@ -13,24 +13,24 @@ spec:
       labels:
         app: booking-service
     spec:
-      # volumes:
-      #   - name: secrets
-      #     secret:
-      #       secretName: booking-secrets  
+      volumes:
+        - name: secrets
+          secret:
+            secretName: booking-secrets  
 
       containers:
         - name: booking-service
-          image: localhost:5000/cs4067-a2-i221339-hamza-ahmed-bookingservice:latest 
+          image: 22i1339/booking-service:latest 
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5001
           envFrom:
             - configMapRef:
                 name: booking-config  
-          # volumeMounts:
-          #   - name: secrets  
-          #     readOnly: true
-          #     mountPath: "/etc/secret-volume"
+          volumeMounts:
+            - name: secrets  
+              readOnly: true
+              mountPath: "/etc/secret-volume"
 
 ---
 

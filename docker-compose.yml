@@ -42,9 +42,10 @@ services:
 
   bookingservice:
     container_name: booking-service
-    build: 
-      context: ./booking-service
-      dockerfile: dockerfile
+    # build: 
+    #   context: ./booking-service
+    #   dockerfile: dockerfile
+    image: 22i1339/booking-service:latest
     restart: always
     ports:
       - "5001:5001"
@@ -56,9 +57,10 @@ services:
 
   eventservice:
     container_name: event-service
-    build: 
-      context: ./event-service
-      dockerfile: dockerfile
+    # build: 
+    #   context: ./event-service
+    #   dockerfile: dockerfile
+    image: 22i1339/event-service:latest
     restart: always
     ports:
       - "5002:5002"
@@ -69,9 +71,10 @@ services:
 
   notificationservice:
     container_name: notification-service
-    build: 
-      context: ./notification-service
-      dockerfile: dockerfile
+    # build: 
+    #   context: ./notification-service
+    #   dockerfile: dockerfile
+    image: 22i1339/notification-service:latest
     restart: always
     ports:
       - "5003:5003"
@@ -83,9 +86,10 @@ services:
 
   userservice:
     container_name: user-service
-    build:
-      context: ./user-service
-      dockerfile: dockerfile
+    # build:
+    #   context: ./user-service
+    #   dockerfile: dockerfile
+    image: 22i1339/user-service:latest
     restart: always
     ports:
       - "5004:5004"
@@ -96,9 +100,10 @@ services:
 
   uiservice:
     container_name: frontend_container
-    build:
-      context: ./frontend-service
-      dockerfile: dockerfile
+    # build:
+    #   context: ./frontend-service
+    #   dockerfile: dockerfile
+    image: 22i1339/frontend-service:latest
     restart: always
     ports: 
       - "3000:3000"

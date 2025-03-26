@@ -13,14 +13,14 @@ spec:
       labels:
         app: frontend-service
     spec:
-      volumes:
-        - name: secrets
-          secret:
-            secretName: frontend-secrets  
+      # volumes:
+      #   - name: secrets
+      #     secret:
+      #       secretName: frontend-secrets  
 
       containers:
         - name: frontend-service
-          image: localhost:5000/cs4067-a2-i221339-hamza-ahmed-uiservice:latest 
+          image: 22i1339/frontend-service:latest  
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000

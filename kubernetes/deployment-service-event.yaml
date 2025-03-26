@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: event-service
-          image: localhost:5000/cs4067-a2-i221339-hamza-ahmed-eventservice:latest 
+          image: 22i1339/event-service:latest  
           imagePullPolicy: IfNotPresent          
           ports:
             - containerPort: 5002

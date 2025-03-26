@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: localhost:5000/postgres:latest
+          image: postgres:latest
           imagePullPolicy: IfNotPresent
           env:
             - name: POSTGRES_USER
